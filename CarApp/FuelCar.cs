@@ -53,4 +53,25 @@ public class FuelCar : Car
             Console.WriteLine($"Tanken indeholder efter kørsel: {FuelLevel} liter");
         }
     }
+
+    public override bool CanDrive()
+    {
+        if (base.IsEngineOn && FuelLevel > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public override double CalculateConsumption(double distance)
+    {
+        double fuelNeeded = distance / KmPerLiter;
+        return fuelNeeded;
+    }
+
+    public override void UpdateEnergyLevel(double distance)
+    {
+        double fuelNeeded = CalculateConsumption(distance);
+        FuelLevel = fuelNeeded -= FuelLevel;
+    }
 }
