@@ -29,31 +29,6 @@ public class FuelCar : Car
         FuelLevel += amount;
     }
 
-    public override void Drive(double distance)
-    {
-        base.StartEngine();
-        if(!IsEngineOn)
-        {
-            throw new InvalidOperationException("Motoren skal være tændt for at køre.");
-        }
-        if (distance < 0)
-        {
-            throw new ArgumentException("Afstand skal være over 0.");
-        }
-        
-        double fuelNeeded = distance / KmPerLiter;
-        if (fuelNeeded > FuelLevel)
-        {
-            throw new InvalidOperationException("Ikke nok brændstof til at køre distancen.");
-        }
-        else
-        {
-            FuelLevel -= fuelNeeded;
-            Odometer += distance;
-            Console.WriteLine($"Tanken indeholder efter kørsel: {FuelLevel} liter");
-        }
-    }
-
     public override bool CanDrive()
     {
         if (base.IsEngineOn && FuelLevel > 0)
