@@ -1,43 +1,36 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net9.0": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Anders Christensen\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Rallo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\car_app.csproj",
-      "projectName": "car_app",
-      "projectPath": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\car_app.csproj",
-      "packagesPath": "C:\\Users\\Anders Christensen\\.nuget\\packages\\",
-      "outputPath": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\obj\\",
+      "projectUniqueName": "C:\\xampp\\htdocs\\gruppe8\\CarApp\\CarApp.csproj",
+      "projectName": "CarApp",
+      "projectPath": "C:\\xampp\\htdocs\\gruppe8\\CarApp\\CarApp.csproj",
+      "packagesPath": "C:\\Users\\Rallo\\.nuget\\packages\\",
+      "outputPath": "C:\\xampp\\htdocs\\gruppe8\\CarApp\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Anders Christensen\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Rallo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net8.0"
+        "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "projectReferences": {}
         }
       },
@@ -54,8 +47,8 @@
       "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
-      "net8.0": {
-        "targetAlias": "net8.0",
+      "net9.0": {
+        "targetAlias": "net9.0",
         "imports": [
           "net461",
           "net462",
