@@ -72,6 +72,6 @@ public class FuelCar : Car
     public override void UpdateEnergyLevel(double distance)
     {
         double fuelNeeded = CalculateConsumption(distance);
-        FuelLevel = fuelNeeded -= FuelLevel;
+        FuelLevel -=  fuelNeeded;
     }
 }
