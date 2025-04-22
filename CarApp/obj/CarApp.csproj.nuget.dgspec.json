@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\CarApp.csproj": {}
+    "C:\\xampp\\htdocs\\gruppe8\\CarApp\\CarApp.csproj": {}
   },
   "projects": {
-    "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\CarApp.csproj": {
+    "C:\\xampp\\htdocs\\gruppe8\\CarApp\\CarApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\CarApp.csproj",
+        "projectUniqueName": "C:\\xampp\\htdocs\\gruppe8\\CarApp\\CarApp.csproj",
         "projectName": "CarApp",
-        "projectPath": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\CarApp.csproj",
-        "packagesPath": "C:\\Users\\Anders Christensen\\.nuget\\packages\\",
-        "outputPath": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\obj\\",
+        "projectPath": "C:\\xampp\\htdocs\\gruppe8\\CarApp\\CarApp.csproj",
+        "packagesPath": "C:\\Users\\Rallo\\.nuget\\packages\\",
+        "outputPath": "C:\\xampp\\htdocs\\gruppe8\\CarApp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Anders Christensen\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Rallo\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
