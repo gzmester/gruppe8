@@ -30,8 +30,15 @@ public class ElectricCar : Car
     }
 
     public override void Drive(double distance){
-
-        base.Drive(0); // Tjekker om motoren er tændt
+        base.StartEngine(); // Tjekker om motoren er tændt
+        if(!IsEngineOn)
+        {
+            throw new InvalidOperationException("Motoren skal være tændt for at køre.");
+        }
+        if (distance < 0)
+        {
+            throw new ArgumentException("Afstand skal være over 0.");
+        }
         double energyNeeded = distance / KmPerKWh; // Energi der skal bruges for at køre distancen
         if(energyNeeded > BatteryCapacity){
             throw new InvalidOperationException("Ikke nok energi til at køre distancen.");
