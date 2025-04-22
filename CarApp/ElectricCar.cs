@@ -30,7 +30,7 @@ public class ElectricCar : Car
     }
 
     public override void Drive(double distance){
-        base.StartEngine(); // Tjekker om motoren er tændt
+        base.StartEngine(); // Starter motoren
         if(!IsEngineOn)
         {
             throw new InvalidOperationException("Motoren skal være tændt for at køre.");
