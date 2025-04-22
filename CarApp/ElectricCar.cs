@@ -8,7 +8,7 @@ using car_app;
 public class ElectricCar : Car
 {
     public double BatteryCapacity { get; private set; } // i kWh
-    public double Batterylevel { get; } // i procent
+    public double Batterylevel { get; private set; } // i procent
     public double KmPerKWh { get; } // km per kWh  
 
 
