@@ -7,9 +7,9 @@ using car_app;
 
 public class ElectricCar : Car
 {
-    public double BatteryCapacity { get; set; } // i kWh
-    public double Batterylevel { get; set; } // i procent
-    public double KmPerKWh { get; set; } // km per kWh  
+    public double BatteryCapacity { get; private set; } // i kWh
+    public double Batterylevel { get; } // i procent
+    public double KmPerKWh { get; } // km per kWh  
 
 
     public ElectricCar(string brand, string model, string licensePlate, double batteryCapacity, double batterylevel, double kmPerKWh) : base(brand, model, licensePlate)
@@ -34,6 +34,29 @@ public class ElectricCar : Car
         }
     }
 
+    public override bool CanDrive()
+    {
+
+        if (!IsEngineOn)
+        {
+            throw new InvalidOperationException("Motoren skal være tændt for at køre.");
+        }
+        return BatteryCapacity > 0; // Kan kun køre hvis batterikapaciteten er over 0
+    }
+    public override void UpdateEnergyLevel(double distance)
+    {
+            double energyNeeded = distance / KmPerKWh;
+            if (energyNeeded > BatteryLevel)
+                throw new InvalidOperationException("Ikke nok batteri.");
+            BatteryLevel -= energyNeeded;
+    }
+
+    public override double CalculateConsumption(double distance)
+    {
+        return distance / KmPerKWh;
+    }
+
+    /*
     public override void Drive(double distance){
         base.StartEngine(); // Starter motoren
         if(!IsEngineOn)
@@ -53,4 +76,5 @@ public class ElectricCar : Car
             Console.WriteLine($"Batterikapacitet efter kørsel: {BatteryCapacity} kWh");
         }
     }
+    */
 }
