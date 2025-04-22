@@ -46,9 +46,9 @@ public class ElectricCar : Car
     public override void UpdateEnergyLevel(double distance)
     {
             double energyNeeded = distance / KmPerKWh;
-            if (energyNeeded > BatteryLevel)
+            if (energyNeeded > Batterylevel)
                 throw new InvalidOperationException("Ikke nok batteri.");
-            BatteryLevel -= energyNeeded;
+            Batterylevel -= energyNeeded;
     }
 
     public override double CalculateConsumption(double distance)
