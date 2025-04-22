@@ -53,6 +53,4 @@ public class ElectricCar : Car
             Console.WriteLine($"Batterikapacitet efter kørsel: {BatteryCapacity} kWh");
         }
     }
-
-
 }
