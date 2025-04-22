@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace car_app
 {
-    public class Car
+    public abstract class Car
     {
         public string Brand { get; }
         public string Model { get; }
@@ -35,10 +35,29 @@ namespace car_app
             Console.WriteLine("Engine stopped.");
         }
 
+        public abstract bool CanDrive();
+
+        public abstract void UpdateEnergyLevel(double amount);
+
+        public abstract double CalculateConsumption(double distance);
+
         public virtual void Drive(double distance)
         {
-            Console.WriteLine($"Driving {distance} km.");
+            if (!IsEngineOn)
+            {
+                Console.WriteLine("Motoren er ikke startet.");
+                return;
+            }
+
+            if (!CanDrive())
+            {
+                Console.WriteLine("ikke nok energi til at køre");
+                return;
+            }
+
+            UpdateEnergyLevel(distance);
             Odometer += (int)distance;
+            Console.WriteLine($"Kørt {distance} km. Ny kilometerstand: {Odometer} km.");
 
         }
     }
