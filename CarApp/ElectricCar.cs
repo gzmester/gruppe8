@@ -1,3 +1,5 @@
+using car_app;
+
 public class ElectricCar : Car
 {
     public double BatteryCapacity { get; set; } // i kWh
@@ -38,7 +40,6 @@ public class ElectricCar : Car
             Odometer += distance; // Opdaterer kilometertælleren
             Console.WriteLine($"Batterikapacitet efter kørsel: {BatteryCapacity} kWh");
         }
-
     }
 
 
