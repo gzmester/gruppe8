@@ -12,7 +12,7 @@ namespace car_app
         public string Model { get; }
         public string LicensePlate { get; }
         public bool IsEngineOn { get; private set; }
-        public int Odometer { get; protected set; }
+        public double Odometer { get; protected set; }
 
         public Car(string brand, string model, string licensePlate)
         {
