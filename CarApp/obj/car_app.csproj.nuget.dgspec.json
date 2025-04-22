@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\CarApp.csproj": {}
+    "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\car_app.csproj": {}
   },
   "projects": {
-    "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\CarApp.csproj": {
+    "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\car_app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\CarApp.csproj",
-        "projectName": "CarApp",
-        "projectPath": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\CarApp.csproj",
+        "projectUniqueName": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\car_app.csproj",
+        "projectName": "car_app",
+        "projectPath": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\car_app.csproj",
         "packagesPath": "C:\\Users\\Anders Christensen\\.nuget\\packages\\",
         "outputPath": "D:\\VS2022Repos\\car_opgaver_gruppe\\CarApp\\obj\\",
         "projectStyle": "PackageReference",
@@ -22,15 +22,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net9.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -47,8 +47,8 @@
         "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "imports": [
             "net461",
             "net462",
