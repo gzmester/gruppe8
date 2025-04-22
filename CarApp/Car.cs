@@ -37,7 +37,7 @@ namespace car_app
 
         public abstract bool CanDrive();
 
-        public abstract void UpdateEnergyLevel(double amount);
+        public abstract void UpdateEnergyLevel(double distance);
 
         public abstract double CalculateConsumption(double distance);
 
