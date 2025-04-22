@@ -37,5 +37,11 @@
             Console.WriteLine("Engine stopped.");
         }
 
+        public virtual void Drive(double distance)
+        {
+            Console.WriteLine($"Driving {distance} km.");
+            Odometer += (int)distance;
+
+        }
     }
 }
