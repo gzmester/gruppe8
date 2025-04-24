@@ -1,59 +1,46 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using car_app;
 
 public class ElectricCar : Car, IEnergy
 {
-    public double BatteryCapacity { get; private set; } // i kWh
-    public double Batterylevel { get; private set; } // i kWh
+    public double EnergyLevel { get; set; }    // Batteriniveau i kWh (nuværende)
+    public double MaxEnergy { get; set; }      // Batterikapacitet i kWh (maks)
+
     public double KmPerKWh { get; } // km per kWh  
 
-
-    public ElectricCar(string brand, string model, string licensePlate, double batteryCapacity, double batterylevel, double kmPerKWh) : base(brand, model, licensePlate)
+    public ElectricCar(string brand, string model, string licensePlate, double maxEnergy, double initialEnergyLevel, double kmPerKWh)
+        : base(brand, model, licensePlate)
     {
-        BatteryCapacity = batteryCapacity;
-        Batterylevel = batterylevel;
+        MaxEnergy = maxEnergy;
+        EnergyLevel = initialEnergyLevel;
         KmPerKWh = kmPerKWh;
     }
-
-    public double EnergyLevel => Batterylevel;
-    public double MaxEnergy => BatteryCapacity;
 
     public void Refill(double amount)
     {
         if (amount < 0)
-        {
             throw new ArgumentException("Mængden skal være positiv");
-        }
 
-        Batterylevel += amount;
-        if (Batterylevel > BatteryCapacity)
-        {
-            Batterylevel = BatteryCapacity;
-        }
+        EnergyLevel += amount;
+        if (EnergyLevel > MaxEnergy)
+            EnergyLevel = MaxEnergy;
     }
 
     public void UseEnergy(double km)
     {
         double energyNeeded = km / KmPerKWh;
-        if (energyNeeded > Batterylevel)
-        {
+
+        if (energyNeeded > EnergyLevel)
             throw new InvalidOperationException("Ikke nok strøm på batteriet");
-        }
-        
-        Batterylevel -= energyNeeded;
+
+        EnergyLevel -= energyNeeded;
     }
 
     public override bool CanDrive(double km)
     {
-
         if (!IsEngineRunning)
-        {
             throw new InvalidOperationException("Motoren skal være tændt for at køre.");
-        }
-        return (Batterylevel >= km / KmPerKWh);
+
+        return EnergyLevel >= km / KmPerKWh;
     }
 }
