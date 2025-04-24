@@ -47,6 +47,6 @@ public class FuelCar : Car, IEnergy
         {
             return true;
         }
-        return EnergyLevel >= km / KmPerLiter;
+        return false;
     }
 }
