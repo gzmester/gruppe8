@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using car_app;
+
 namespace car_app
 {
     internal interface IEnergy
     {
-        double EnergyLevel { get; }
-        double MaxEnergy {  get; }
+        double EnergyLevel { get; set; }
+        double MaxEnergy { get; set; }
 
         void Refill(double amount);
 

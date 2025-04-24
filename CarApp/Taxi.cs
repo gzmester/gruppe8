@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using car_app;
 
-
-public class Taxi : Car
+public class Taxi : Car, IEnergy
 {
     public double StartPrice { get; private set; } // i kr
     public double PricePerKm { get; private set; } // i kr. per km
@@ -19,6 +18,7 @@ public class Taxi : Car
         PricePerKm = pricePerKm;
         PricePerMinute = pricePerMinute;
         MeterStarted = false;
+        
     }
 
 
@@ -73,5 +73,7 @@ public class Taxi : Car
         // Kan implementeres hvis taxaen er elektrisk eller hybrid
         return 0;
     }
+
+
 
 }
