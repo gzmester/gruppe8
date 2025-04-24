@@ -1,52 +1,52 @@
 namespace car_app;
 
-public class FuelCar : Car
+public class FuelCar : Car, IEnergy
 {
-    public double FuelLevel { get; set; }
-    public double TankCapacity { get; set; }
-    double KmPerLiter { get; set; }
+    public double EnergyLevel { get; set; }   
+    public double MaxEnergy { get; set; }
 
-    public FuelCar(string brand, string model, string licensePlate, double fuelLevel, double tankCapacity,
+    public double KmPerLiter;
+
+    public FuelCar(string brand, string model, string licensePlate, double energyLevel, double maxEnergy,
         double kmPerLiter) : base(brand, model, licensePlate)
     {
-        FuelLevel = fuelLevel;
-        TankCapacity = tankCapacity;
+        EnergyLevel = energyLevel;
+        MaxEnergy = maxEnergy;
         KmPerLiter = kmPerLiter;
     }
 
-    public void Refuel(double amount)
+    public void Refill(double amount)
     {
         if (amount < 0)
         {
-            throw new ArgumentException("Brændstof mængde skal være over 0.");
+            throw new ArgumentException("Mængden skal være positiv");
         }
 
-        if (amount + FuelLevel > TankCapacity)
+        EnergyLevel += amount;
+        if (EnergyLevel > MaxEnergy)
         {
-            throw new ArgumentException("Der kan ikke fyldes mere brændstof på end tankens kapacitet.");
+            EnergyLevel = MaxEnergy;
         }
-        
-        FuelLevel += amount;
     }
 
-    public override bool CanDrive()
+    public void UseEnergy(double km)
     {
-        if (base.IsEngineOn && FuelLevel > 0)
+        double fuelNeeded = km / KmPerLiter;
+
+        if (fuelNeeded > EnergyLevel)
+        {
+            throw new InvalidOperationException("Ikke nok strøm på batteriet");
+        }
+
+        EnergyLevel -= fuelNeeded;
+    }
+
+    public override bool CanDrive(double km)
+    {
+        if (base.IsEngineRunning)
         {
             return true;
         }
-        return false;
-    }
-
-    public override double CalculateConsumption(double distance)
-    {
-        double fuelNeeded = distance / KmPerLiter;
-        return fuelNeeded;
-    }
-
-    public override void UpdateEnergyLevel(double distance)
-    {
-        double fuelNeeded = CalculateConsumption(distance);
-        FuelLevel -=  fuelNeeded;
+        return EnergyLevel >= km / KmPerLiter;
     }
 }
