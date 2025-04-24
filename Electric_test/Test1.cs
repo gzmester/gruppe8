@@ -13,23 +13,45 @@ namespace Electric_test
             ElectricCar electricCar = new ElectricCar("Tesla", "Model S", "CD67890", 1000, 100, 5);
             electricCar.StartEngine();
             electricCar.Drive(50);
-            Console.WriteLine($"ElectricCar Odometer: {electricCar.Odometer} km, Battery left: {electricCar.Batterylevel:F2} kWh");
 
             // Test fuel car
             FuelCar fuelCar = new FuelCar("Toyota", "Corolla", "EF12345", 50, 50, 20);
             fuelCar.StartEngine();
             fuelCar.Drive(100);
-            Console.WriteLine($"FuelCar Odometer: {fuelCar.Odometer} km, Fuel level: {fuelCar.FuelLevel:F2} L");
 
+
+        }
+
+        [TestMethod]
+        public void TestFuelTaxi()
+        {
             // Test taxi
-            Taxi taxi = new Taxi("Mercedes", "E-Class", "TX11223", 49.0, 12.3, 7.5);
+            FuelCar fuelCar = new FuelCar("Toyota", "Corolla", "EF12345", 50, 15, 20);
+            Taxi fuelTaxi = new Taxi("Toyota", "Corolla", "EF12345", 40, 12, 4, fuelCar);
+
+            ElectricCar electricCar = new ElectricCar("Tesla", "Model S", "CD67890", 100, 5, 20);
+            Taxi electricTaxi = new Taxi("Tesla", "Model S", "CD67890", 40, 10, 4, electricCar);
+
+            //Test begge taxityper
+            Console.WriteLine("Tester Fuel Taxi:");
+            TestTaxi(fuelTaxi);
+
+            Console.WriteLine("Tester Electric Taxi:");
+            TestTaxi(electricTaxi);
+
+        }
+        [TestMethod]
+        private void TestTaxi(Taxi taxi)
+        {
             taxi.StartEngine();
             taxi.StartMeter();
-            taxi.Drive(20);
-            double fare = taxi.CalculateFare(20, 30);
+            taxi.Drive(10);
+            double fare = taxi.CalculateFare(10, 15);
             taxi.StopMeter();
-            Console.WriteLine($"Taxi Odometer: {taxi.Odometer} km, Fare: {fare:F2} kr.");
+            taxi.StopEngine();
 
+            Console.WriteLine($"Taxi Odometer: {taxi.Odometer} km, Fare: {fare:F2} kr");
+            Console.WriteLine($"Taxi Energy level: {taxi.EnergyLevel:F2} L or kWh");
         }
     }
 }

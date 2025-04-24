@@ -88,7 +88,6 @@ public class Taxi : Car
         return fare;
     }
 
-    private IEnergy _energy;
 
     public override void Drive(double km)
     {
@@ -102,7 +101,7 @@ public class Taxi : Car
             Console.WriteLine("Ikke nok energi til at køre");
             return;
         }
-        _energy.UseEnergy(km);
+        car.UseEnergy(km);
         Odometer += (int)km;
         Console.WriteLine($"Kørt {km} km. Ny kilometerstand: {Odometer} km.");
     }
