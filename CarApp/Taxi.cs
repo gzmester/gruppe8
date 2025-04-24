@@ -5,12 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using car_app;
 
-public class Taxi : Car, IEnergy
+public class Taxi : Car
 {
     public double StartPrice { get; private set; } // i kr
     public double PricePerKm { get; private set; } // i kr. per km
     public double PricePerMinute { get; private set;} // i kr. per minut
     public bool MeterStarted { get; private set; } // true hvis taxameteret er startet
+    interface IEnergy
+    {
+        double EnergyLevel { get; set; }
+        double MaxEnergy { get; set; }
+
+        void Refill(double amount);
+
+        void UseEnergy(double km);
+    }
 
     public Taxi(string brand, string model, string licensePlate, double startPrice, double pricePerKm, double pricePerMinute) : base(brand, model, licensePlate)
     {
@@ -42,11 +51,12 @@ public class Taxi : Car, IEnergy
         Console.WriteLine("Taxameteret er stoppet.");
     }
 
-    public override bool CanDrive(){
+    public override bool CanDrive(double km){
 
     return MeterStarted && IsEngineOn; // Kan kun køre hvis motoren er tændt og taxameteret er startet
 
     }
+
 
     public double CalculateFare(double distance, double minutes)
     {

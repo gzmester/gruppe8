@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace car_app
 {
-    internal interface IEnergy
+    public interface IEnergy
     {
         double EnergyLevel { get; set; }
         double MaxEnergy { get; set; }
