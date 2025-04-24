@@ -8,8 +8,8 @@ namespace car_app
 {
     public interface IEnergy
     {
-        double EnergyLevel { get; set; }
-        double MaxEnergy { get; set; }
+        double EnergyLevel { get; }
+        double MaxEnergy { get; }
 
         void Refill(double amount);
 

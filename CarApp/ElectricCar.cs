@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using car_app;
 
-public class ElectricCar : Car
+public class ElectricCar : Car, IEnergy
 {
     public double BatteryCapacity { get; private set; } // i kWh
-    public double Batterylevel { get; private set; } // i procent
+    public double Batterylevel { get; private set; } // i kWh
     public double KmPerKWh { get; } // km per kWh  
 
 
@@ -19,62 +19,41 @@ public class ElectricCar : Car
         KmPerKWh = kmPerKWh;
     }
 
+    public double EnergyLevel => Batterylevel;
+    public double MaxEnergy => BatteryCapacity;
 
-    public void Charge(double amount)
+    public void Refill(double amount)
     {
         if (amount < 0)
         {
-            throw new ArgumentException("Batteri niveau skal være over 0.");
+            throw new ArgumentException("Mængden skal være positiv");
         }
 
         Batterylevel += amount;
-        if (Batterylevel > 100)
+        if (Batterylevel > BatteryCapacity)
         {
-            Batterylevel = 100;
+            Batterylevel = BatteryCapacity;
         }
     }
 
-    public override bool CanDrive()
+    public void UseEnergy(double km)
+    {
+        double energyNeeded = km / KmPerKWh;
+        if (energyNeeded > Batterylevel)
+        {
+            throw new InvalidOperationException("Ikke nok strøm på batteriet");
+        }
+        
+        Batterylevel -= energyNeeded;
+    }
+
+    public override bool CanDrive(double km)
     {
 
-        if (!IsEngineOn)
+        if (!IsEngineRunning)
         {
             throw new InvalidOperationException("Motoren skal være tændt for at køre.");
         }
-        return BatteryCapacity > 0; // Kan kun køre hvis batterikapaciteten er over 0
+        return (Batterylevel >= km / KmPerKWh);
     }
-    public override void UpdateEnergyLevel(double distance)
-    {
-            double energyNeeded = distance / KmPerKWh;
-            if (energyNeeded > Batterylevel)
-                throw new InvalidOperationException("Ikke nok batteri.");
-            Batterylevel -= energyNeeded;
-    }
-
-    public override double CalculateConsumption(double distance)
-    {
-        return distance / KmPerKWh;
-    }
-
-    /*
-    public override void Drive(double distance){
-        base.StartEngine(); // Starter motoren
-        if(!IsEngineOn)
-        {
-            throw new InvalidOperationException("Motoren skal være tændt for at køre.");
-        }
-        if (distance < 0)
-        {
-            throw new ArgumentException("Afstand skal være over 0.");
-        }
-        double energyNeeded = distance / KmPerKWh; // Energi der skal bruges for at køre distancen
-        if(energyNeeded > BatteryCapacity){
-            throw new InvalidOperationException("Ikke nok energi til at køre distancen.");
-        }else{
-            BatteryCapacity -= energyNeeded; // Opdaterer batterikapaciteten
-            Odometer += distance; // Opdaterer kilometertælleren
-            Console.WriteLine($"Batterikapacitet efter kørsel: {BatteryCapacity} kWh");
-        }
-    }
-    */
 }
