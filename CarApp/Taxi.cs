@@ -11,22 +11,16 @@ public class Taxi : Car
     public double PricePerKm { get; private set; } // i kr. per km
     public double PricePerMinute { get; private set;} // i kr. per minut
     public bool MeterStarted { get; private set; } // true hvis taxameteret er startet
-    interface IEnergy
-    {
-        double EnergyLevel { get; set; }
-        double MaxEnergy { get; set; }
 
-        void Refill(double amount);
+    private IEnergy car; // Komposition
 
-        void UseEnergy(double km);
-    }
-
-    public Taxi(string brand, string model, string licensePlate, double startPrice, double pricePerKm, double pricePerMinute) : base(brand, model, licensePlate)
+    public Taxi(string brand, string model, string licensePlate, double startPrice, double pricePerKm, double pricePerMinute, IEnergy car) : base(brand, model, licensePlate)
     {
         StartPrice = startPrice;
         PricePerKm = pricePerKm;
         PricePerMinute = pricePerMinute;
         MeterStarted = false;
+        this.car = car;
         
     }
 
@@ -53,9 +47,33 @@ public class Taxi : Car
 
     public override bool CanDrive(double km){
 
-    return MeterStarted && IsEngineOn; // Kan kun køre hvis motoren er tændt og taxameteret er startet
+    return MeterStarted && IsEngineRunning; // Kan kun køre hvis motoren er tændt og taxameteret er startet
 
     }
+
+    // IEnergy Interface
+    public double EnergyLevel
+    {
+        get { return car.EnergyLevel; }
+        set { car.EnergyLevel = value; }
+    }
+
+    public double MaxEnergy
+    {
+        get { return car.MaxEnergy; }
+        set { car.MaxEnergy = value; }
+    }
+
+    public void Refill(double amount)
+    {
+        car.Refill(amount);
+    }
+
+    public void UseEnergy(double km)
+    {
+        car.UseEnergy(km);
+    }
+
 
 
     public double CalculateFare(double distance, double minutes)
@@ -66,22 +84,27 @@ public class Taxi : Car
             throw new InvalidOperationException("Taxameteret er ikke startet.");
         }
         double fare = StartPrice + (PricePerKm * distance) + (PricePerMinute * minutes);
-        return fare;
         Console.WriteLine($"Total pris: {fare} kr.");
-
+        return fare;
     }
 
-    public override void UpdateEnergyLevel(double distance)
-    {
-        // Ingen opdatering af energiniveau for taxa, da det er en generel bil
-        // Kan implementeres hvis taxaen er elektrisk eller hybrid
-    }
+    private IEnergy _energy;
 
-    public override double CalculateConsumption(double distance)
+    public override void Drive(double km)
     {
-        // Ingen specifik brændstofberegning for taxa, da det er en generel bil
-        // Kan implementeres hvis taxaen er elektrisk eller hybrid
-        return 0;
+        if (!IsEngineRunning)
+        {
+            Console.WriteLine("Motoren er ikke startet.");
+            return;
+        }
+        if (!CanDrive(km))
+        {
+            Console.WriteLine("Ikke nok energi til at køre");
+            return;
+        }
+        _energy.UseEnergy(km);
+        Odometer += (int)km;
+        Console.WriteLine($"Kørt {km} km. Ny kilometerstand: {Odometer} km.");
     }
 
 
