@@ -43,7 +43,7 @@ public class FuelCar : Car, IEnergy
 
     public override bool CanDrive(double km)
     {
-        if (base.IsEngineRunning)
+        if (base.IsEngineRunning & EnergyLevel >= km / KmPerLiter)
         {
             return true;
         }
