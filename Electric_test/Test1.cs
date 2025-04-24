@@ -54,4 +54,30 @@ namespace Electric_test
             Console.WriteLine($"Taxi Energy level: {taxi.EnergyLevel:F2} L or kWh");
         }
     }
+    [TestClass]
+    public class FleetManagerTest
+    {
+        [TestMethod]
+        public void FleetTest()
+        {
+            FuelCar fuelCar = new FuelCar("Toyota", "Corolla", "EF12345", 50, 15, 20);
+            Taxi fuelTaxi = new Taxi("Toyota", "Corolla", "EF12345", 40, 12, 4, fuelCar);
+
+            ElectricCar electricCar = new ElectricCar("Tesla", "Model S", "CD67890", 100, 5, 20);
+            Taxi electricTaxi = new Taxi("Tesla", "Model S", "CD67890", 40, 10, 4, electricCar);
+            FleetManager fleet = new FleetManager();
+
+            fleet.AddVehicle(new ElectricCar("Tesla", "Model S", "CD67890", 1000, 100, 5));
+            fleet.AddVehicle(new FuelCar("Toyota", "Corolla", "EF12345", 50, 50, 20));
+            fleet.AddVehicle(fuelTaxi);
+            fleet.AddVehicle(electricCar);
+
+            fleet.DisplayFleetStatus();
+            fleet.StartAllEngines();
+            fleet.DriveAllVehicles(20);
+            fleet.RefillAllVehicles();
+            fleet.DisplayFleetStatus();
+            fleet.StopAllEngines();
+        }
+    }
 }
