@@ -6,59 +6,53 @@ using System.Threading.Tasks;
 
 namespace car_app
 {
-    public abstract class Car
+    public abstract class Car : IDrivable
     {
         public string Brand { get; }
         public string Model { get; }
         public string LicensePlate { get; }
-        public bool IsEngineOn { get; private set; }
         public double Odometer { get; protected set; }
+        public bool IsEngineRunning { get; private set; }
 
         public Car(string brand, string model, string licensePlate)
         {
             Brand = brand;
             Model = model;
             LicensePlate = licensePlate;
-            IsEngineOn = false;
             Odometer = 0;
+            IsEngineRunning = false;
         }
 
         public void StartEngine()
         {
-            IsEngineOn = true;
+            IsEngineRunning = true;
             Console.WriteLine("Engine started.");
         }
 
         public void StopEngine()
         {
-            IsEngineOn = false;
+            IsEngineRunning = false;
             Console.WriteLine("Engine stopped.");
         }
 
-        public abstract bool CanDrive();
-
-        public abstract void UpdateEnergyLevel(double distance);
-
-        public abstract double CalculateConsumption(double distance);
-
-        public virtual void Drive(double distance)
+        public virtual void Drive(double km)
         {
-            if (!IsEngineOn)
+            if (!IsEngineRunning)
             {
                 Console.WriteLine("Motoren er ikke startet.");
                 return;
             }
 
-            if (!CanDrive())
+            if (!CanDrive(km))
             {
                 Console.WriteLine("ikke nok energi til at køre");
                 return;
             }
-
-            UpdateEnergyLevel(distance);
-            Odometer += (int)distance;
-            Console.WriteLine($"Kørt {distance} km. Ny kilometerstand: {Odometer} km.");
+            Odometer += (int)km;
+            Console.WriteLine($"Kørt {km} km. Ny kilometerstand: {Odometer} km.");
 
         }
+
+        public abstract bool CanDrive(double km);
     }
 }
