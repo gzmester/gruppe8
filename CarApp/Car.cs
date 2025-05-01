@@ -54,5 +54,16 @@ namespace car_app
         }
 
         public abstract bool CanDrive(double km);
+
+        public override string ToString()
+        {
+            return $"{Brand};{Model};{LicensePlate};{Odometer}";
+        }
+
+        // Underklasser skal håndtere deserialisering
+        public static Car FromString(string input)
+        {
+            throw new NotImplementedException("Brug konkrete subklasser (f.eks. FuelCar.FromString())");
+        }
     }
 }

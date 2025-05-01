@@ -43,4 +43,36 @@ public class ElectricCar : Car, IEnergy
 
         return EnergyLevel >= km / KmPerKWh;
     }
+
+    // Serialiser ElectricCar-specifikke data
+    public override string ToString()
+    {
+        return $"ElectricCar;{Brand};{Model};{LicensePlate};{Odometer};{EnergyLevel};{MaxEnergy};{KmPerKWh}";
+    }
+    // Deserialiser fra streng
+    public static new ElectricCar FromString(string input)
+    {
+        var parts = input.Split(';');
+        var typeMarker = parts[0]; // "ElectricCar"
+        var brand = parts[1];
+        var model = parts[2];
+        var licensePlate = parts[3]; // Rettet fra parts[2] til parts[3]
+        var odometer = double.Parse(parts[4]); // Rettet fra parts[3] til parts[4]
+        var energyLevel = double.Parse(parts[5]);
+        var maxEnergy = double.Parse(parts[6]);
+        var kmPerKWh = double.Parse(parts[7]); // Tilføjet parts[7]
+
+        var car = new ElectricCar(
+            brand: brand,
+            model: model,
+            licensePlate: licensePlate,
+            maxEnergy: maxEnergy,
+            initialEnergyLevel: energyLevel,
+            kmPerKWh: kmPerKWh
+        )
+        {
+            Odometer = odometer
+        };
+        return car;
+    }
 }
